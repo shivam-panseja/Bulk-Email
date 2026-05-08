@@ -132,7 +132,7 @@ app.post("/start", async (req, res) => {
       if (!item.name && item.email) item.name = item.email.split("@")[0];
 
       await transporter.sendMail({
-        from: `"Shivam Panseja" <${growthEmail}>`,
+        from: `"Growth Studio" <${growthEmail}>`,
         to: item.email,
         subject,
         text: getFinalBody(item),
