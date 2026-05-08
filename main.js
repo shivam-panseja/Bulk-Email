@@ -28,11 +28,15 @@ let isRunning = false;
 const growthEmail = process.env.EMAIL_USER;
 
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true, // Use SSL
   auth: {
     user: growthEmail,
-    pass: process.env.EMAIL_PASS, // Gmail App Password
+    pass: process.env.EMAIL_PASS,
   },
+  connectionTimeout: 10000, // 10 seconds
+  greetingTimeout: 10000,
 });
 
 // 🧠 helper
