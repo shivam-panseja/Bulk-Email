@@ -11,7 +11,8 @@ const XLSX = require("xlsx");
 
 const app = express();
 app.use(cors());
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(express.static("public"));
 
 const uploadDir = path.join(__dirname, "uploads");
@@ -131,7 +132,7 @@ app.post("/start", async (req, res) => {
       if (!item.name && item.email) item.name = item.email.split("@")[0];
 
       await transporter.sendMail({
-        from: `"Growth Studio" <${growthEmail}>`,
+        from: `"Shivam Panseja" <${growthEmail}>`,
         to: item.email,
         subject,
         text: getFinalBody(item),
