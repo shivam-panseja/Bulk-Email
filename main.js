@@ -28,15 +28,17 @@ let isRunning = false;
 const growthEmail = process.env.EMAIL_USER;
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true, // Use SSL
+  service: "gmail",
+  pool: true, // Reuse connections for bulk sending
+  maxConnections: 3, // Limit concurrent connections
+  maxMessages: 100, // Max messages per connection
   auth: {
     user: growthEmail,
     pass: process.env.EMAIL_PASS,
   },
-  connectionTimeout: 10000, // 10 seconds
-  greetingTimeout: 10000,
+  connectionTimeout: 30000, // 30 seconds
+  greetingTimeout: 30000,
+  socketTimeout: 30000,
 });
 
 // 🧠 helper
